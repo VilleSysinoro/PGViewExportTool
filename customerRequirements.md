@@ -4,7 +4,7 @@ Asiakkaalla on käytössä PostgreSQL-pohjainen sovellus, jonka näkymien tiedot
 
 ## Keskeiset vaatimukset
 - [ ] Sovelluksella on graafinen käyttöliitymä
-- [ ] Yhteysmekkijono tietokantaan muodostetaan tapauskohtaisesti graadisesta käyttöliittymästä
+- [ ] Yhteysmekkijono tietokantaan muodostetaan tapauskohtaisesti graadisesta käyttöliittymästä, huom. salasana syötetään
 - [ ] Käyttjä syöttää näkymän nimen tekstikenttään
 - [ ] Ohjelma tarkistaa, että näkymä on olemassa
 - [ ] Käyttäjä valitsee tiedoston nimen ja sijainnin, johon CSV-tiedosto tallennetaan
