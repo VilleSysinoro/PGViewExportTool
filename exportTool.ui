@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
-    <height>720</height>
+    <width>952</width>
+    <height>696</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -16,11 +16,16 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>11</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="separatorGroupBox">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -29,15 +34,20 @@
       <height>221</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="title">
      <string>Sarake-erotin</string>
     </property>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QRadioButton" name="semicolonRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>82</width>
+       <width>111</width>
        <height>26</height>
       </rect>
      </property>
@@ -46,11 +56,17 @@
        <pointsize>11</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
-      <string>pilkku (,)</string>
+      <string>puolipiste (;)</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_2">
+    <widget class="QRadioButton" name="commaRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -64,11 +80,14 @@
        <pointsize>11</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
-      <string>puolipiste (;)</string>
+      <string>pilkku (,)</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_3">
+    <widget class="QRadioButton" name="tabRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -82,11 +101,14 @@
        <pointsize>11</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Sarkain</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_4">
+    <widget class="QRadioButton" name="otherSeparatorRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -100,11 +122,14 @@
        <pointsize>11</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Muu</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="separatorLineEdit">
      <property name="geometry">
       <rect>
        <x>70</x>
@@ -120,232 +145,11 @@
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="testConnectionPushButton">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>250</y>
-      <width>320</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(85, 170, 255);
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Testaa yhteys</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="serverLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>50</y>
-      <width>320</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="placeholderText">
-     <string>Palvelimen nimi tai IP-osoite</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="portLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>90</y>
-      <width>320</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="placeholderText">
-     <string>TCP-portin numero, oletus 5432</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="databaseLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>130</y>
-      <width>320</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="placeholderText">
-     <string>Tietokannan nimi, hallintatietokanta postgres</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="userNameLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>170</y>
-      <width>320</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="placeholderText">
-     <string>Käyttäjätunnus, oletuspääkäyttäjä postgres</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="passwordLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>210</y>
-      <width>320</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="placeholderText">
-     <string>Käyttäjän salasana</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="passwordLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>210</y>
-      <width>58</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Salasana</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="dbSettingsLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>211</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Tietokantayhteyden asetukset</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="userNameLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>172</y>
-      <width>97</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Käyttäjätunnus</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="serverLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>50</y>
-      <width>50</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Palvelin</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="portLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>90</y>
-      <width>35</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Portti</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="databaseLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>70</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Tietokanta</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="objectTypeLabel">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>300</y>
+      <y>280</y>
       <width>107</width>
       <height>20</height>
      </rect>
@@ -364,17 +168,20 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>330</y>
+      <y>310</y>
       <width>400</width>
       <height>26</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
    </widget>
    <widget class="QLabel" name="objectNameLabel">
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>300</y>
+      <y>280</y>
       <width>94</width>
       <height>20</height>
      </rect>
@@ -393,17 +200,20 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>330</y>
+      <y>310</y>
       <width>251</width>
       <height>26</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
    </widget>
    <widget class="QTableWidget" name="previewTableWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>390</y>
+      <y>370</y>
       <width>911</width>
       <height>261</height>
      </rect>
@@ -416,7 +226,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>359</y>
+      <y>339</y>
       <width>69</width>
       <height>20</height>
      </rect>
@@ -435,7 +245,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>730</x>
-      <y>330</y>
+      <y>310</y>
       <width>201</width>
       <height>26</height>
      </rect>
@@ -443,7 +253,11 @@ color: rgb(255, 255, 255);</string>
     <property name="font">
      <font>
       <pointsize>11</pointsize>
+      <bold>true</bold>
      </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(85, 170, 127);
@@ -453,7 +267,7 @@ color: rgb(255, 255, 255);</string>
      <string>Vie tiedostoon</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="qualifierGroupBox">
     <property name="geometry">
      <rect>
       <x>740</x>
@@ -462,10 +276,15 @@ color: rgb(255, 255, 255);</string>
       <height>221</height>
      </rect>
     </property>
-    <property name="title">
-     <string>Tekstin tinnuste</string>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
     </property>
-    <widget class="QRadioButton" name="radioButton_5">
+    <property name="title">
+     <string>Tekstin tunniste</string>
+    </property>
+    <widget class="QRadioButton" name="noneRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -479,11 +298,17 @@ color: rgb(255, 255, 255);</string>
        <pointsize>11</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Ei mitään</string>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_6">
+    <widget class="QRadioButton" name="doubleQuotationmarkRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -497,11 +322,14 @@ color: rgb(255, 255, 255);</string>
        <pointsize>11</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>lainausmerkki (&quot;)</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_7">
+    <widget class="QRadioButton" name="quotationmarkRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -515,11 +343,14 @@ color: rgb(255, 255, 255);</string>
        <pointsize>11</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>puolilainausmerkki (')</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_8">
+    <widget class="QRadioButton" name="otherQualifierRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -533,11 +364,14 @@ color: rgb(255, 255, 255);</string>
        <pointsize>11</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Muu</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="qualifierLineEdit">
      <property name="geometry">
       <rect>
        <x>70</x>
@@ -553,13 +387,184 @@ color: rgb(255, 255, 255);</string>
      </property>
     </widget>
    </widget>
+   <widget class="QFrame" name="settngsFrame">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>471</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0" colspan="2">
+      <widget class="QLabel" name="dbSettingsLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tietokantayhteyden asetukset</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="serverLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Palvelin</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="serverLineEdit">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="placeholderText">
+        <string>Palvelimen nimi tai IP-osoite</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="portLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Portti</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="portLineEdit">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="placeholderText">
+        <string>TCP-portin numero, oletus 5432</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="databaseLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tietokanta</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="databaseLineEdit">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="placeholderText">
+        <string>Tietokannan nimi, hallintatietokanta postgres</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="userNameLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Käyttäjätunnus</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="userNameLineEdit">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="placeholderText">
+        <string>Käyttäjätunnus, oletuspääkäyttäjä postgres</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="passwordLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Salasana</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="passwordLineEdit">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="placeholderText">
+        <string>Käyttäjän salasana</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QPushButton" name="testConnectionPushButton">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(85, 170, 255);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Testaa yhteys</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>960</width>
+     <width>952</width>
      <height>33</height>
     </rect>
    </property>
@@ -573,10 +578,22 @@ color: rgb(255, 255, 255);</string>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>radioButton</tabstop>
-  <tabstop>radioButton_2</tabstop>
-  <tabstop>radioButton_3</tabstop>
-  <tabstop>radioButton_4</tabstop>
+  <tabstop>serverLineEdit</tabstop>
+  <tabstop>portLineEdit</tabstop>
+  <tabstop>databaseLineEdit</tabstop>
+  <tabstop>userNameLineEdit</tabstop>
+  <tabstop>passwordLineEdit</tabstop>
+  <tabstop>testConnectionPushButton</tabstop>
+  <tabstop>semicolonRadioButton</tabstop>
+  <tabstop>commaRadioButton</tabstop>
+  <tabstop>tabRadioButton</tabstop>
+  <tabstop>otherSeparatorRadioButton</tabstop>
+  <tabstop>separatorLineEdit</tabstop>
+  <tabstop>noneRadioButton</tabstop>
+  <tabstop>doubleQuotationmarkRadioButton</tabstop>
+  <tabstop>quotationmarkRadioButton</tabstop>
+  <tabstop>otherQualifierRadioButton</tabstop>
+  <tabstop>qualifierLineEdit</tabstop>
   <tabstop>objectTypeComboBox</tabstop>
   <tabstop>objectNameComboBox</tabstop>
   <tabstop>previewTableWidget</tabstop>
