@@ -449,6 +449,49 @@ class DbConnection():
             if currentConnection:
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
+
+    # TODO: Lisää tämä Wikisivun referenceen
+    def getColumnNames(self, table: str) -> list:
+        """Returns a list of column names in a table or view
+
+        Args:
+            table (str): Name of the table or view
+
+        Raises:
+            e: An error message raised by server or library
+
+        Returns:
+            list: Column names as list of strings
+        """
+            
+        try:    
+
+            # Luodaan yhteys tietokantaan
+            currentConnection = psycopg2.connect(self.connectionString)
+
+            # Luodaan kursori suorittamaan tietokantoperaatiota
+            cursor = currentConnection.cursor()
+
+            # Määritellään SQL-lause, paikkamerkki, jolla haetaan 0 riviä dataa
+            sqlClause = f'SELECT * FROM {table} LIMIT 0'
+            
+            # Luodaan kursori ja suoritetaan SQL-komento
+            cursor.execute(sqlClause)
+
+            # Haetaan sarakeotsikot kursorin description-ominaisuudesta
+            columnNames = [desc[0] for desc in cursor.description]
+
+            return columnNames
+        
+        except (Exception, psycopg2.Error) as e:
+            raise e 
+        
+        finally:
+
+            # Selvitetään muodostuiko yhteysolio
+            if currentConnection:
+                cursor.close()# Suljetaan kursori
+                currentConnection.close() # Tuhotaan yhteys
         
 if __name__ == "__main__":
 
@@ -459,3 +502,5 @@ if __name__ == "__main__":
                       'password': 'Q2werty'}
     dbconnection = DbConnection(settingsDictionary)
     
+    otsikot = dbconnection.getColumnNames('asiakas')
+    print(otsikot)
