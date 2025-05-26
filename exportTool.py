@@ -67,12 +67,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.chosenQualifier = ''
         self.ui.semicolonRadioButton.setChecked(True)
         self.ui.withoutRadioButton.setChecked(True)
+
+        # Otetaan tietokannan valinta -yhdistelmäruutu pois käytöstä
+        self.ui.databaseComboBox.setEnabled(False)
         
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
 
         # Kun painetaan Testaa-painiketta, näytetään tilarivillä tulos ja päivitetään objektityyppi valinnat. Jos virhe, näytetään msgbox. Painike asettaa tietokantaparametrit ha yhteysmerkkijonon
         self.ui.testConnectionPushButton.clicked.connect(self.connectDb)
+
+        # Kun tietokannan nimeä muokataan tarkistetaan onko se postgres jolloin aktivoidaan tietokannan yhdistelmäruutu
+        self.ui.databaseLineEdit.textChanged.connect(self.activateChooseDb)
 
         # Kun poistutaan objektityypin valinnasta, haetaan tyypin objektilista ja päivitetään objektin nimi -valinta
         self.ui.objectTypeComboBox.currentIndexChanged.connect(self.getObjectNames)
@@ -116,36 +122,65 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                       'userName': self.userName,
                       'password': self.password}
         
-        # Luodaan tietokantayhteysolio
-        try:
-            dbConnection = dbOperations.DbConnection(settingsDictionary)
-            table = 'information_schema.tables'
-            columns = ['table_type']
-            filterText = f"table_schema NOT IN ('information_schema', 'pg_catalog')"
-
-            # Alustetaan objectTypes muutuja
-            objectTypes = dbConnection.filterDistinctColumsFromTable(table,columns,filterText)
-
-            dbConnection.filterColumsFromTable(table,columns,filterText)
-            
-            self.ui.statusbar.showMessage('Yhteyden muodostaminen onnistui')
-
-            # Tehdään monikkolistasta merkkijonolista
-            self.ui.objectTypeComboBox.clear()
-            cleandObjectTypeList = ['Valitse']
-            for value in objectTypes:
-                objectType = value[0]
-                cleandObjectTypeList.append(objectType)
-
-            # Lisätään lista yhdistelmäruutuun
-            self.ui.objectTypeComboBox.addItems(cleandObjectTypeList)
-
-        except Exception as e:
-            self.errorWindowTitle = 'Yhteys tietokantaan ei onnistunut'
-            self.errorText = 'Yhteyden muodostuksessa tapahtui virhe'
-            self.errorDetails = str(e)
-            self.openWarning()
+        # Jos tietokannakis on syötetty postgres, haetaan tietokantojen nimet
+        if self.ui.databaseLineEdit.text() == 'postgres':
+            self.ui.databaseComboBox.setEnabled(True)
         
+            # Luodaan tietokantayhteysolio
+            try:
+                dbConnection = dbOperations.DbConnection(settingsDictionary)
+                table = 'pg_catalog.pg_database'
+                columns = ['datname']
+                filterText = f"datistemplate = false"
+
+                # Alustetaan objectTypes muutuja
+                databaseNames = dbConnection.filterDistinctColumsFromTable(table,columns,filterText)
+                dbConnection.filterColumsFromTable(table,columns,filterText)
+                self.ui.statusbar.showMessage('Haettiin tietokantojen nimet')
+
+                # Tehdään monikkolistasta merkkijonolista
+                self.ui.databaseComboBox.clear()
+                cleandDatabaseNameList = ['Valitse']
+                for value in databaseNames:
+                    databaseName = value[0]
+                    cleandDatabaseNameList.append(databaseName)
+
+                # Lisätään lista yhdistelmäruutuun
+                self.ui.databaseComboBox.addItems(cleandDatabaseNameList)
+
+            except:
+                pass
+        
+        # Jos tietokannan nimeksi on annettu käyttjätietokanta, hateaan objektit
+        else:
+            # Luodaan tietokantayhteysolio
+            try:
+                dbConnection = dbOperations.DbConnection(settingsDictionary)
+                table = 'information_schema.tables'
+                columns = ['table_type']
+                filterText = f"table_schema NOT IN ('information_schema', 'pg_catalog')"
+
+                # Alustetaan objectTypes muutuja
+                objectTypes = dbConnection.filterDistinctColumsFromTable(table,columns,filterText)
+                dbConnection.filterColumsFromTable(table,columns,filterText)
+                self.ui.statusbar.showMessage('Yhteyden muodostaminen onnistui')
+
+                # Tehdään monikkolistasta merkkijonolista
+                self.ui.objectTypeComboBox.clear()
+                cleandObjectTypeList = ['Valitse']
+                for value in objectTypes:
+                    objectType = value[0]
+                    cleandObjectTypeList.append(objectType)
+
+                # Lisätään lista yhdistelmäruutuun
+                self.ui.objectTypeComboBox.addItems(cleandObjectTypeList)
+
+            except Exception as e:
+                self.errorWindowTitle = 'Yhteys tietokantaan ei onnistunut'
+                self.errorText = 'Yhteyden muodostuksessa tapahtui virhe'
+                self.errorDetails = str(e)
+                self.openWarning()
+
     # Haetaan järjestelmätaulusta tietokantaobjektien (taulujen ja näkyminen)
     def getObjectNames(self):
 
@@ -289,7 +324,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Luodaan CSV-tiedoston otsikot
         headerRow = ''
         for item in self.columnNamesList:
-            headerRow = headerRow + item + separator
+            headerRow = headerRow + item + separator + '\n'
 
         # Poistetaam otikkorivin viimeinen erotinmekki
         headerRow = headerRow[:-1] # Poistetaan viimeisen sarakkeen jälkeen tuleva erotinmerkki
@@ -301,11 +336,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             for columnValue in row:
                 isString = isinstance(columnValue, str)
                 if isString == True:
-                    columnValue = f'{self.chosenQualifier}{columnValue}{self.chosenQualifier}'
+                    columnValue = f'{textQualifier}{columnValue}{textQualifier}'
                 columnValue = str(columnValue)
                 dataRow = dataRow + columnValue + separator
             dataRow = dataRow [:-1]
-            dataRows = dataRows + dataRow + '\\n'
+            dataRows = dataRows + dataRow
         data = headerRow + dataRows
         return data
 

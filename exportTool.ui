@@ -151,8 +151,8 @@
    <widget class="QLabel" name="objectTypeLabel">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>280</y>
+      <x>310</x>
+      <y>290</y>
       <width>107</width>
       <height>20</height>
      </rect>
@@ -170,9 +170,9 @@
    <widget class="QComboBox" name="objectNameComboBox">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>490</x>
       <y>310</y>
-      <width>400</width>
+      <width>301</width>
       <height>26</height>
      </rect>
     </property>
@@ -183,8 +183,8 @@
    <widget class="QLabel" name="objectNameLabel">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>280</y>
+      <x>490</x>
+      <y>290</y>
       <width>94</width>
       <height>20</height>
      </rect>
@@ -202,9 +202,9 @@
    <widget class="QComboBox" name="objectTypeComboBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>310</x>
       <y>310</y>
-      <width>251</width>
+      <width>161</width>
       <height>26</height>
      </rect>
     </property>
@@ -229,7 +229,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>339</y>
+      <y>350</y>
       <width>69</width>
       <height>20</height>
      </rect>
@@ -247,9 +247,9 @@
    <widget class="QPushButton" name="exportPushButton">
     <property name="geometry">
      <rect>
-      <x>730</x>
+      <x>810</x>
       <y>310</y>
-      <width>201</width>
+      <width>121</width>
       <height>26</height>
      </rect>
     </property>
@@ -563,6 +563,35 @@ color: rgb(255, 255, 255);</string>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QComboBox" name="databaseComboBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>310</y>
+      <width>271</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="chooseDatabaseLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>290</y>
+      <width>107</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Tietokanta</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
