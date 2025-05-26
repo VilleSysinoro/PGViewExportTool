@@ -76,9 +76,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Kun painetaan Testaa-painiketta, näytetään tilarivillä tulos ja päivitetään objektityyppi valinnat. Jos virhe, näytetään msgbox. Painike asettaa tietokantaparametrit ha yhteysmerkkijonon
         self.ui.testConnectionPushButton.clicked.connect(self.connectDb)
-
-        # Kun tietokannan nimeä muokataan tarkistetaan onko se postgres jolloin aktivoidaan tietokannan yhdistelmäruutu
-        self.ui.databaseLineEdit.textChanged.connect(self.activateChooseDb)
+        self.ui.databaseComboBox.currentIndexChanged.connect(self.getObjectTypesFromDbCombo)
 
         # Kun poistutaan objektityypin valinnasta, haetaan tyypin objektilista ja päivitetään objektin nimi -valinta
         self.ui.objectTypeComboBox.currentIndexChanged.connect(self.getObjectNames)
@@ -111,9 +109,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Päivitetään tietokantaan liityvät ominaisuudet syötettyjen tietojen perusteella
         self.serverName = self.ui.serverLineEdit.text()
         self.portNumber = self.ui.portLineEdit.text()
-        self.databaseName = self.ui.databaseLineEdit.text()
         self.userName = self.ui.userNameLineEdit.text()
         self.password = self.ui.passwordLineEdit.text()
+
+        # Tarkistetaan onko valittuna järjestelmätietokanta postgres
+        if self.ui.databaseLineEdit == 'posgres':
+            self.databaseName = self.ui.databaseComboBox.currentText()
+        else:
+            self.databaseName = self.ui.databaseLineEdit.text()
 
         # Muodostetaan asetussanakirja
         settingsDictionary = {'server': self.serverName,
@@ -148,8 +151,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 # Lisätään lista yhdistelmäruutuun
                 self.ui.databaseComboBox.addItems(cleandDatabaseNameList)
 
-            except:
-                pass
+            except Exception as e:
+                # TODO: Kutsu virhedialogi
+                raise e
         
         # Jos tietokannan nimeksi on annettu käyttjätietokanta, hateaan objektit
         else:
@@ -184,6 +188,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # Haetaan järjestelmätaulusta tietokantaobjektien (taulujen ja näkyminen)
     def getObjectNames(self):
 
+        if self.ui.databaseLineEdit == 'posgres':
+            self.databaseName = self.databaseComboBox.currentText()
+        else:
+            self.databaseName = self.ui.databaseLineEdit.text()
+
         # Muodostetaan asetussanakirja
         settingsDictionary = {'server': self.serverName,
                       'port': self.portNumber,
@@ -202,8 +211,46 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             objectNames = dbConnection.filterDistinctColumsFromTable(table,columns,filterText)
             self.ui.statusbar.showMessage('Haettiin tietokantaobjektien nimet')
+
+            # Tehdään monikkolistasta merkkijonolista
+            self.ui.objectNameComboBox.clear() # Tyhjentää vanhat vaihtoehdot
+            cleanedObjectNameList = ['Valitse']
+            for value in objectNames:
+                objectSchema = value[0] # Ottaa monikon ensimmäisen arvon -> skeema
+                objectName = value[1] # Ottaa monikon toisen arvon -> objektin nimi
+                objectFullName = f'{objectSchema}.{objectName}' # Objektin polku: skeema.nimi
+                cleanedObjectNameList.append(objectFullName)
             
-            print(objectNames)
+            # Lisätään lista yhdistelmäruutuun
+            self.ui.objectNameComboBox.addItems(cleanedObjectNameList)
+        
+        except Exception as e:
+            self.errorWindowTitle = 'Yhteys tietokantaobjektien haku ei onnistunut'
+            self.errorText = 'Objektien nimien haku ei onnistunut'
+            self.errorDetails = str(e)
+            self.openWarning()
+
+    # Haetaan tietokantaobjektien tyypit Tietokannan nimi -yhdistelmäruudun perusteella
+    def getObjectTypesFromDbCombo(self):
+        chosenDatabaseName = self.ui.databaseComboBox.currentText()
+        # Muodostetaan asetussanakirja
+        settingsDictionary = {'server': self.serverName,
+                            'port': self.portNumber,
+                            'database': chosenDatabaseName,
+                            'userName': self.userName,
+                            'password': self.password}
+        
+        # Luodaan tietokantayhteysolio
+        try:
+            dbConnection = dbOperations.DbConnection(settingsDictionary)
+            table = 'information_schema.tables'
+            columns = ['table_schema','table_name']
+            tableType = self.ui.objectTypeComboBox.currentText()
+
+            filterText  = f"table_type = '{tableType}' AND table_schema NOT IN ('information_schema', 'pg_catalog')"
+
+            objectNames = dbConnection.filterDistinctColumsFromTable(table,columns,filterText)
+            self.ui.statusbar.showMessage('Haettiin tietokantaobjektien nimet')
 
             # Tehdään monikkolistasta merkkijonolista
             self.ui.objectNameComboBox.clear() # Tyhjentää vanhat vaihtoehdot
@@ -224,11 +271,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.openWarning()
 
     def updatePreview(self):
+        if self.ui.databaseLineEdit == 'posgres':
+            chosenDatabaseName = self.databaseComboBox.currentText()
+        else:
+            chosenDatabaseName = self.ui.databaseLineEdit.text()
 
         # Muodostetaan asetussanakirja
         settingsDictionary = {'server': self.serverName,
                       'port': self.portNumber,
-                      'database': self.databaseName,
+                      'database': chosenDatabaseName,
                       'userName': self.userName,
                       'password': self.password}
         
@@ -246,10 +297,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             try:
                 dbConnection = dbOperations.DbConnection(settingsDictionary)
                 self.resultSet = dbConnection.readAllColumnsFromTable(currentObjectSelection)
-                print(self.resultSet)
         
-            except:
-                pass
+            except Exception as e:
+                # TODO: Kutsu virhedialogi
+                raise e
             
             # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
             self.ui.previewTableWidget.clear()

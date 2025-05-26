@@ -172,7 +172,7 @@
      <rect>
       <x>490</x>
       <y>310</y>
-      <width>301</width>
+      <width>311</width>
       <height>26</height>
      </rect>
     </property>
@@ -204,7 +204,7 @@
      <rect>
       <x>310</x>
       <y>310</y>
-      <width>161</width>
+      <width>171</width>
       <height>26</height>
      </rect>
     </property>
@@ -569,7 +569,7 @@ color: rgb(255, 255, 255);</string>
      <rect>
       <x>20</x>
       <y>310</y>
-      <width>271</width>
+      <width>281</width>
       <height>24</height>
      </rect>
     </property>
