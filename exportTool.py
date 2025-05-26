@@ -62,9 +62,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Oletustallennushakemisto
         self.defaultFolder = f'{os.path.expanduser('~')}\\Documents\\'
 
-        # Käyttäjän valitsemat CSV-asetukset
+        # CSV-asetusten oletusarvot
         self.chosenSeparator = ';'
         self.chosenQualifier = ''
+        self.ui.semicolonRadioButton.setChecked(True)
+        self.ui.withoutRadioButton.setChecked(True)
         
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
@@ -89,7 +91,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.separatorLineEdit.textChanged.connect(self.forceOtherSeparator)
 
         # Teksting tunnistimien valinnan signaalit
-        self.ui.noneRadioButton.clicked.connect(self.setQualifier)
+        self.ui.withoutRadioButton.clicked.connect(self.setQualifier)
         self.ui.quotationmarkRadioButton.clicked.connect(self.setQualifier)
         self.ui.doubleQuotationmarkRadioButton.clicked.connect(self.setQualifier)
         self.ui.otherQualifierRadioButton.clicked.connect(self.setQualifier)
@@ -270,7 +272,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     # Selvitetään, minkä tekstin tunnistimen käyttäjä on valinnut
     def setQualifier(self):
-        if self.ui.noneRadioButton.isChecked() == True:
+        if self.ui.withoutRadioButton.isChecked() == True:
             self.chosenQualifier = ''
         if self.ui.doubleQuotationmarkRadioButton.isChecked() == True:
             self.chosenQualifier = '"'

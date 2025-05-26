@@ -62,8 +62,11 @@
      <property name="text">
       <string>puolipiste (;)</string>
      </property>
-     <property name="checked">
+     <property name="checkable">
       <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="commaRadioButton">
@@ -284,7 +287,7 @@ color: rgb(255, 255, 255);</string>
     <property name="title">
      <string>Tekstin tunniste</string>
     </property>
-    <widget class="QRadioButton" name="noneRadioButton">
+    <widget class="QRadioButton" name="withoutRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -304,8 +307,11 @@ color: rgb(255, 255, 255);</string>
      <property name="text">
       <string>Ei mitään</string>
      </property>
-     <property name="checked">
+     <property name="checkable">
       <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="doubleQuotationmarkRadioButton">
@@ -589,7 +595,7 @@ color: rgb(255, 255, 255);</string>
   <tabstop>tabRadioButton</tabstop>
   <tabstop>otherSeparatorRadioButton</tabstop>
   <tabstop>separatorLineEdit</tabstop>
-  <tabstop>noneRadioButton</tabstop>
+  <tabstop>withoutRadioButton</tabstop>
   <tabstop>doubleQuotationmarkRadioButton</tabstop>
   <tabstop>quotationmarkRadioButton</tabstop>
   <tabstop>otherQualifierRadioButton</tabstop>
