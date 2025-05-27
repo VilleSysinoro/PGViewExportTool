@@ -135,9 +135,9 @@
     <widget class="QLineEdit" name="separatorLineEdit">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>80</x>
        <y>180</y>
-       <width>31</width>
+       <width>41</width>
        <height>26</height>
       </rect>
      </property>
@@ -380,9 +380,9 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLineEdit" name="qualifierLineEdit">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>80</x>
        <y>180</y>
-       <width>31</width>
+       <width>41</width>
        <height>26</height>
       </rect>
      </property>
@@ -558,7 +558,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>Testaa yhteys</string>
+        <string>Yhdistä</string>
        </property>
       </widget>
      </item>
@@ -572,6 +572,9 @@ color: rgb(255, 255, 255);</string>
       <width>281</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
    </widget>
    <widget class="QLabel" name="chooseDatabaseLabel">
